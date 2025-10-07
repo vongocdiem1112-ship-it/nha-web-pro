@@ -1,0 +1,259 @@
+{
+  "timestamp": "2025-10-03T08:51:17.107099",
+  "schema_audit": {
+    "tables": {
+      "users": {
+        "exists": true,
+        "columns": 10,
+        "missing_columns": [],
+        "extra_columns": [
+          "phone",
+          "avatar_url",
+          "broker_status",
+          "social_links",
+          "updated_at"
+        ],
+        "score": 75
+      },
+      "listings": {
+        "exists": true,
+        "columns": 21,
+        "missing_columns": [],
+        "extra_columns": [
+          "latitude",
+          "direction",
+          "is_hot",
+          "bathrooms",
+          "bedrooms",
+          "status",
+          "created_at",
+          "views_count",
+          "longitude",
+          "city",
+          "address",
+          "updated_at",
+          "description",
+          "images"
+        ],
+        "score": 30
+      },
+      "favorites": {
+        "exists": true,
+        "columns": 4,
+        "missing_columns": [],
+        "extra_columns": [
+          "created_at"
+        ],
+        "score": 95
+      },
+      "conversations": {
+        "exists": true,
+        "columns": 7,
+        "missing_columns": [],
+        "extra_columns": [
+          "created_at",
+          "last_message",
+          "last_message_at"
+        ],
+        "score": 85
+      },
+      "messages": {
+        "exists": true,
+        "columns": 7,
+        "missing_columns": [],
+        "extra_columns": [
+          "created_at",
+          "is_read",
+          "image_url"
+        ],
+        "score": 85
+      },
+      "contact_history": {
+        "exists": true,
+        "columns": 6,
+        "missing_columns": [],
+        "extra_columns": [
+          "created_at",
+          "user_id"
+        ],
+        "score": 90
+      },
+      "news": {
+        "exists": true,
+        "columns": 10,
+        "missing_columns": [],
+        "extra_columns": [
+          "published_at",
+          "image_url",
+          "created_at",
+          "updated_at",
+          "views_count",
+          "description"
+        ],
+        "score": 70
+      },
+      "view_history": {
+        "exists": true,
+        "columns": 4,
+        "missing_columns": [],
+        "extra_columns": [
+          "created_at"
+        ],
+        "score": 95
+      }
+    },
+    "indexes": {
+      "count": 16,
+      "details": [
+        {
+          "name": "users_email_key",
+          "table": "users"
+        },
+        {
+          "name": "users_phone_key",
+          "table": "users"
+        },
+        {
+          "name": "idx_listings_type",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_district",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_price",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_created_at",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_user_id",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_status",
+          "table": "listings"
+        },
+        {
+          "name": "idx_listings_location",
+          "table": "listings"
+        },
+        {
+          "name": "favorites_user_id_listing_id_key",
+          "table": "favorites"
+        },
+        {
+          "name": "idx_favorites_user_id",
+          "table": "favorites"
+        },
+        {
+          "name": "idx_favorites_listing_id",
+          "table": "favorites"
+        },
+        {
+          "name": "conversations_listing_id_user_id_broker_id_key",
+          "table": "conversations"
+        },
+        {
+          "name": "idx_conversations_user_id",
+          "table": "conversations"
+        },
+        {
+          "name": "idx_conversations_broker_id",
+          "table": "conversations"
+        },
+        {
+          "name": "idx_messages_conversation_id",
+          "table": "messages"
+        }
+      ]
+    },
+    "constraints": {
+      "foreign_keys": 13
+    },
+    "functions": {},
+    "types": {
+      "count": 18,
+      "names": [
+        "regrole",
+        "_regrole",
+        "pg_replication_origin_status",
+        "_pg_replication_origin_status",
+        "factor_type",
+        "factor_status",
+        "_factor_status",
+        "one_time_token_type",
+        "oauth_registration_type",
+        "listing_type",
+        "buckettype",
+        "user_role",
+        "_user_role",
+        "broker_status",
+        "_broker_status",
+        "listing_status",
+        "_listing_status",
+        "contact_type"
+      ]
+    },
+    "score": 94.53125
+  },
+  "data_audit": {
+    "table_counts": {
+      "users": 6,
+      "listings": 8,
+      "favorites": 9,
+      "conversations": 9,
+      "messages": 35,
+      "contact_history": 23,
+      "news": 5,
+      "view_history": 41
+    },
+    "data_quality": {
+      "average": 100.0
+    },
+    "referential_integrity": {
+      "score": 100
+    },
+    "score": 100.0
+  },
+  "relationship_audit": {},
+  "performance_audit": {
+    "query_performance": {
+      "users_count": {
+        "time_ms": 2.93,
+        "status": "fast"
+      },
+      "listings_count": {
+        "time_ms": 2.87,
+        "status": "fast"
+      },
+      "listings_filter": {
+        "time_ms": 3.26,
+        "status": "fast"
+      },
+      "listings_join": {
+        "time_ms": 4.82,
+        "status": "fast"
+      }
+    },
+    "index_usage": {},
+    "table_sizes": {},
+    "score": 96.53148651123047
+  },
+  "security_audit": {
+    "rls_policies": {
+      "count": 0
+    },
+    "user_roles": {
+      "broker": 3,
+      "admin": 1,
+      "user": 2
+    },
+    "sensitive_data": {},
+    "score": 70
+  },
+  "overall_score": 90.26568412780762
+}
