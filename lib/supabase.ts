@@ -1,32 +1,27 @@
 import { createClient } from '@supabase/supabase-js';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Platform } from 'react-native';
+// ✅ VungTauLand Supabase Configuration (Web Version)
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://zewyoonmkknfbgrmsfhw.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpld3lvb25ta2tuZmJncm1zZmh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NjI3NDgsImV4cCI6MjA3NTAzODc0OH0.xMHzfexKR-x6-x47pPAX5gMj395jMKS7hQUPPeBLKLU';
 
-// ✅ VungTauLand Supabase Configuration (Updated & Verified)
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL || 'https://zewyoonmkknfbgrmsfhw.supabase.co';
-const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inpld3lvb25ta2tuZmJncm1zZmh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NjI3NDgsImV4cCI6MjA3NTAzODc0OH0.xMHzfexKR-x6-x47pPAX5gMj395jMKS7hQUPPeBLKLU';
-
-// Cross-platform storage
-const webStorage = {
-  getItem: async (key: string) => {
+// Web storage for browser
+const storage = {
+  getItem: (key: string) => {
     if (typeof window !== 'undefined') {
       return window.localStorage.getItem(key);
     }
     return null;
   },
-  setItem: async (key: string, value: string) => {
+  setItem: (key: string, value: string) => {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(key, value);
     }
   },
-  removeItem: async (key: string) => {
+  removeItem: (key: string) => {
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem(key);
     }
   },
 };
-
-const storage = Platform.OS === 'web' ? webStorage : AsyncStorage;
 
 // Main Supabase client (for app usage)
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
@@ -64,7 +59,7 @@ export const testSupabaseConnection = async () => {
 };
 
 // Auto-test connection in development
-if (__DEV__) {
+if (import.meta.env.DEV) {
   testSupabaseConnection();
 }
 

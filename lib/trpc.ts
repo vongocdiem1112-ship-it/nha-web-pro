@@ -2,17 +2,20 @@ import { createTRPCReact } from "@trpc/react-query";
 import { httpLink } from "@trpc/client";
 import type { AppRouter } from "@/backend/trpc/app-router";
 import superjson from "superjson";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 export const trpc = createTRPCReact<AppRouter>();
 
 const getBaseUrl = () => {
-  if (process.env.EXPO_PUBLIC_RORK_API_BASE_URL) {
-    return process.env.EXPO_PUBLIC_RORK_API_BASE_URL;
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL;
+  }
+
+  // For local development
+  if (typeof window !== 'undefined') {
+    return window.location.origin;
   }
 
   throw new Error(
-    "No base url found, please set EXPO_PUBLIC_RORK_API_BASE_URL"
+    "No base url found, please set VITE_API_BASE_URL"
   );
 };
 
@@ -21,15 +24,15 @@ let authToken: string | null = null;
 export const setAuthToken = (token: string | null) => {
   authToken = token;
   if (token) {
-    AsyncStorage.setItem('auth_token', token);
+    localStorage.setItem('auth_token', token);
   } else {
-    AsyncStorage.removeItem('auth_token');
+    localStorage.removeItem('auth_token');
   }
 };
 
 export const getAuthToken = async () => {
   if (authToken) return authToken;
-  authToken = await AsyncStorage.getItem('auth_token');
+  authToken = localStorage.getItem('auth_token');
   return authToken;
 };
 

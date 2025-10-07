@@ -1,0 +1,39 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["vite/client"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*", "./*"]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "vite-env.d.ts",
+    "index.html",
+    "lib/**/*",
+    "components/**/*.web.tsx",
+    "components/Header.tsx",
+    "components/Hero.tsx",
+    "components/Footer.tsx",
+    "components/PropertyGrid.tsx",
+    "components/Toaster.tsx",
+    "pages/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "app/**/*",
+    "components/**/*.tsx",
+    "!components/**/*.web.tsx",
+    "!components/Header.tsx",
+    "!components/Hero.tsx",
+    "!components/Footer.tsx",
+    "!components/PropertyGrid.tsx",
+    "!components/Toaster.tsx"
+  ]
+}
